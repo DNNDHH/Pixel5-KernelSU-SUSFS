@@ -156,7 +156,7 @@ jobs:
           echo "Running sed commands..."
           
           # Run sed commands for modifications
-          sed -i 's/check_defconfig//' ./build.config
+          sed -i 's/check_defconfig//' ./build.config.common
           sed -i 's/check_defconfig//' ./build.config.redbull
           sed -i 's/check_defconfig && //' ./build.config.redbull_no-cfi
 
