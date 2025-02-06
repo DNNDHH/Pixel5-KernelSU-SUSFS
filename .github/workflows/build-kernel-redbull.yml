@@ -158,7 +158,7 @@ jobs:
           # Run sed commands for modifications
           sed -i 's/check_defconfig//' ./build.config.common
           sed -i 's/check_defconfig//' ./build.config.redbull
-          sed -i 's/check_defconfig && //' ./build.config.redbull_no-cfi
+          sed -i 's/check_defconfig && //' ./build.config.redbull.no-cfi
 
           sed -i '$s|echo "\$res"|echo "\-Wild+"|' ./scripts/setlocalversion
           sed -i 's/-dirty//' ./scripts/setlocalversion
