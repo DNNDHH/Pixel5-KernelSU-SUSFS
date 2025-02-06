@@ -180,7 +180,7 @@ jobs:
           cd "$CONFIG"
           
           echo "Copying Image"
-          cp ./out/android-msm-pixel-4.19/dist ../AnyKernel3/Image
+          cp -r ./out/android-msm-pixel-4.19/dist ../AnyKernel3/Image
           
       - name: Create ZIP Files for Different Formats
         run: |
