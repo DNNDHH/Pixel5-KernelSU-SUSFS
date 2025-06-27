@@ -70,13 +70,9 @@ jobs:
 
 
 
-      - name: 🔍 Locate boot.img-ramdisk.cpio.lz4
+      - name: 🔍 Locate boot.img
         id: locate_ramdisk
         run: |
-          ls -l /home/runner/work/pixel5-ksunextsusfs
-          ls -l /home/runner/work
-          ls -l /home/runner
-          
           echo "📁 当前工作目录：$(pwd)"
           echo "📦 搜索 boot.img ..."
     
