@@ -246,9 +246,6 @@ jobs:
           ls -l ./out/android-msm-pixel-4.19/dist/vendor_boot.img
           ls -l ./out/android-msm-pixel-4.19/dist/dtbo.img
           
-          cp -r ./out/android-msm-pixel-4.19/dist/boot.img ../AnyKernel3/Image
-          cp -r ./out/android-msm-pixel-4.19/dist/vendor_boot.img ../AnyKernel3/Image
-          cp -r ./out/android-msm-pixel-4.19/dist/dtbo.img ../AnyKernel3/Image
           
       - name: Create ZIP Files for Different Formats
         run: |
@@ -265,3 +262,41 @@ jobs:
           name: kernel-${{ env.CONFIG }}
           path: |
             *.zip
+
+      - name: 现在在哪？
+        run: |
+          ls -l
+
+      - name: Upload boot.img
+        uses: actions/upload-artifact@v4
+        with:
+          name: boot.img
+          path: "./out/android-msm-pixel-4.19/dist/boot.img"
+          
+      - name: Upload vendor_boot.img
+        uses: actions/upload-artifact@v4
+        with:
+          name: vendor_boot.img
+          path: "./out/android-msm-pixel-4.19/dist/vendor_boot.img"
+
+      - name: Upload dtbo.img
+        uses: actions/upload-artifact@v4
+        with:
+          name: dtbo.img
+          path: "./out/android-msm-pixel-4.19/dist/dtbo.img"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
