@@ -69,6 +69,9 @@ jobs:
         run: |
           echo "Creating folder for configuration: $CONFIG..."
           mkdir -p "$CONFIG"
+          
+          cp -v boot.img-ramdisk.cpio.lz4 "$CONFIG/"
+          
           cd "$CONFIG"
           
           # Initialize and sync kernel source
@@ -79,13 +82,7 @@ jobs:
           $REPO --version
           $REPO --trace sync -c -j$(nproc --all) --no-tags --fail-fast
 
-
-      - name: Replace Ramdisk with Custom File
-        run: |
-          cd "$CONFIG"
-          echo "Replacing ramdisk-aosp_arm64.img with boot.img-ramdisk.cpio.lz4"
-          cp -fv ../boot.img-ramdisk.cpio.lz4 prebuilts/boot-artifacts/ramdisks/ramdisk-aosp_arm64.img
-
+          cp -fv boot.img-ramdisk.cpio.lz4 prebuilts/boot-artifacts/ramdisks/ramdisk-aosp_arm64.img
 
       - name: Add KernelSU
         run: |
