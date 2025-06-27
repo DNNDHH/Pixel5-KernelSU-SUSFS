@@ -84,6 +84,8 @@ jobs:
           echo "Changing to configuration directory: $CONFIG..."
           cd "$CONFIG/private/msm-google/"
           
+          git checkout 7b0944645172
+          
           echo "Adding KernelSU..."
           curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s v0.9.5
           #cd ./KernelSU/kernel
