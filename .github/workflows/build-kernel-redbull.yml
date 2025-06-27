@@ -70,6 +70,7 @@ jobs:
       - name: 🔍 Locate boot.img-ramdisk.cpio.lz4
         id: locate_ramdisk
         run: |
+          ls -l
           echo "📁 当前工作目录：$(pwd)"
           echo "📦 搜索 boot.img ..."
     
