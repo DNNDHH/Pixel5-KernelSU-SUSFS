@@ -79,6 +79,14 @@ jobs:
           $REPO --version
           $REPO --trace sync -c -j$(nproc --all) --no-tags --fail-fast
 
+
+      - name: Replace Ramdisk with Custom File
+        run: |
+          cd "$CONFIG"
+          echo "Replacing ramdisk-aosp_arm64.img with boot.img-ramdisk.cpio.lz4"
+          cp -fv ../boot.img-ramdisk.cpio.lz4 prebuilts/boot-artifacts/ramdisks/ramdisk-aosp_arm64.img
+
+
       - name: Add KernelSU
         run: |
           echo "Changing to configuration directory: $CONFIG..."
