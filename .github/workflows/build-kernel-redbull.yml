@@ -220,6 +220,8 @@ jobs:
           echo "Copying Image"
           cp -r ./out/android-msm-pixel-4.19/dist/Image.lz4 ../AnyKernel3/Image
           cp -r ./out/android-msm-pixel-4.19/dist/boot.img ../AnyKernel3/
+          ls -l ./out/android-msm-pixel-4.19/dist/vendor_boot.img
+          ls -l ./out/android-msm-pixel-4.19/dist/dtbo.img
           
       - name: Create ZIP Files for Different Formats
         run: |
