@@ -22,6 +22,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+
       - name: Get build space
         run: |
           free -h
@@ -70,6 +71,13 @@ jobs:
 
 
 
+      - name: unzip
+        run: |
+          ls -l
+          unzip -t vendor_ramdisk.zip
+          ls -l
+
+
       - name: 🔍 Locate boot.img
         id: locate_ramdisk
         run: |
@@ -87,6 +95,10 @@ jobs:
           fi
 
 
+
+
+
+
       
       - name: Initialize and Sync Kernel Source
         run: |
@@ -95,7 +107,8 @@ jobs:
           mkdir -p "$CONFIG"
 
           echo "复制 ramdisk：$FOUND_PATH 到 $CONFIG/"
-          cp -v "$FOUND_PATH" "$CONFIG/"
+          cp -fv "$FOUND_PATH" "$CONFIG/"
+          cp -fv vendor_ramdisk.img "$CONFIG/"
           
           cd "$CONFIG"
           
@@ -106,8 +119,17 @@ jobs:
           # Sync repo and apply patches
           $REPO --version
           $REPO --trace sync -c -j$(nproc --all) --no-tags --fail-fast
+          
+          ls -l prebuilts/boot-artifacts/ramdisks/
+          
+          ls -l prebuilts/boot-artifacts/ramdisks/ramdisk-aosp_arm64.img
 
           cp -fv boot.img prebuilts/boot-artifacts/ramdisks/ramdisk-aosp_arm64.img
+          cp -fv vendor_ramdisk.img prebuilts/boot-artifacts/ramdisks/vendor_ramdisk-barbet.img
+          cp -fv vendor_ramdisk.img prebuilts/boot-artifacts/ramdisks/vendor_ramdisk-redfin.img
+          cp -fv vendor_ramdisk.img prebuilts/boot-artifacts/ramdisks/vendor_ramdisk-bramble.img
+
+          ls -l prebuilts/boot-artifacts/ramdisks/ramdisk-aosp_arm64.img
 
       - name: Add KernelSU
         run: |
