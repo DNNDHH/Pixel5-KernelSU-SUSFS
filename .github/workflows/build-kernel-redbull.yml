@@ -241,9 +241,14 @@ jobs:
           
           echo "Copying Image"
           cp -r ./out/android-msm-pixel-4.19/dist/Image.lz4 ../AnyKernel3/Image
-          cp -r ./out/android-msm-pixel-4.19/dist/boot.img ../AnyKernel3/
+          
+          ls -l ./out/android-msm-pixel-4.19/dist/boot.img
           ls -l ./out/android-msm-pixel-4.19/dist/vendor_boot.img
           ls -l ./out/android-msm-pixel-4.19/dist/dtbo.img
+          
+          cp -r ./out/android-msm-pixel-4.19/dist/boot.img ../AnyKernel3/Image
+          cp -r ./out/android-msm-pixel-4.19/dist/vendor_boot.img ../AnyKernel3/Image
+          cp -r ./out/android-msm-pixel-4.19/dist/dtbo.img ../AnyKernel3/Image
           
       - name: Create ZIP Files for Different Formats
         run: |
@@ -254,7 +259,7 @@ jobs:
           echo "Creating zip file $ZIP_NAME..."
           zip -r "../$ZIP_NAME" ./*
           
-      - name: Upload Build Artifacts
+      - name: 全部构建镜像
         uses: actions/upload-artifact@v4
         with:
           name: kernel-${{ env.CONFIG }}
