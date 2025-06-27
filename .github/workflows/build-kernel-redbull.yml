@@ -79,7 +79,7 @@ jobs:
           FOUND=$(find . -type f -name "boot.img" | head -n 1)
     
           if [ -z "$FOUND" ]; then
-            echo "❌ 未找到 boot.img 文件，终止构建。"
+            echo "❌ 未找到 boot.img 文件，终止构建。重要文件。。不集成编译进去会开不了机。。哈哈"
             exit 1
           else
             echo "✅ 找到了文件：$FOUND"
