@@ -73,7 +73,7 @@ jobs:
           
           # Initialize and sync kernel source
           echo "Initializing and syncing kernel source..."
-          $REPO init -u https://android.googlesource.com/kernel/manifest -b android-msm-redbull-4.19-android14-qpr3 --repo-rev=v2.16 --depth=1
+          $REPO init -u https://android.googlesource.com/kernel/manifest -b android-msm-redbull-4.19-android14-qpr3 --repo-rev=v2.54 --depth=1
 
           # Sync repo and apply patches
           $REPO --version
@@ -84,7 +84,13 @@ jobs:
           echo "Changing to configuration directory: $CONFIG..."
           cd "$CONFIG/private/msm-google/"
           
-          # git checkout 7b0944645172
+          COMMIT_ID="7b0944645172"
+          if git rev-parse --quiet --verify "$COMMIT_ID^{commit}"; then
+              echo "✅ Found commit $COMMIT_ID, checking out..."
+              git checkout $COMMIT_ID
+          else
+              echo "⚠️ Commit $COMMIT_ID not found, skipping checkout."
+          fi
           
           echo "Adding KernelSU..."
           curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s v0.9.5
