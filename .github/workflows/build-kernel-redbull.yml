@@ -71,10 +71,11 @@ jobs:
 
 
 
-      - name: unzip
+      - name: Recombine and unzip vendor_ramdisk
         run: |
           ls -l
-          unzip -t vendor_ramdisk.zip
+          cat vendor_ramdisk.z* > vendor_ramdisk_full.zip
+          unzip -t vendor_ramdisk_full.zip
           ls -l
 
 
@@ -93,10 +94,6 @@ jobs:
             echo "✅ 找到了文件：$FOUND"
             echo "FOUND_PATH=$FOUND" >> $GITHUB_ENV
           fi
-
-
-
-
 
 
       
