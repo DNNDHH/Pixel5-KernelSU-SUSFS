@@ -71,12 +71,12 @@ jobs:
         id: locate_ramdisk
         run: |
           echo "📁 当前工作目录：$(pwd)"
-          echo "📦 搜索 boot.img-ramdisk.cpio.lz4 ..."
+          echo "📦 搜索 boot.img ..."
     
-          FOUND=$(find . -type f -name "boot.img-ramdisk.cpio.lz4" | head -n 1)
+          FOUND=$(find . -type f -name "boot.img" | head -n 1)
     
           if [ -z "$FOUND" ]; then
-            echo "❌ 未找到 boot.img-ramdisk.cpio.lz4 文件，终止构建。"
+            echo "❌ 未找到 boot.img 文件，终止构建。"
             exit 1
           else
             echo "✅ 找到了文件：$FOUND"
@@ -104,7 +104,7 @@ jobs:
           $REPO --version
           $REPO --trace sync -c -j$(nproc --all) --no-tags --fail-fast
 
-          cp -fv boot.img-ramdisk.cpio.lz4 prebuilts/boot-artifacts/ramdisks/ramdisk-aosp_arm64.img
+          cp -fv boot.img prebuilts/boot-artifacts/ramdisks/ramdisk-aosp_arm64.img
 
       - name: Add KernelSU
         run: |
