@@ -64,13 +64,35 @@ jobs:
           git clone https://github.com/WildPlusKernel/AnyKernel3.git -b "$ANYKERNEL_BRANCH"
           git clone https://gitlab.com/simonpunk/susfs4ksu.git -b "$SUSFS_BRANCH"
           git clone https://github.com/Myviforme/kernel_patches.git
+
+
+
+      - name: 🔍 Locate boot.img-ramdisk.cpio.lz4
+        id: locate_ramdisk
+        run: |
+          echo "📁 当前工作目录：$(pwd)"
+          echo "📦 搜索 boot.img-ramdisk.cpio.lz4 ..."
+    
+          FOUND=$(find . -type f -name "boot.img-ramdisk.cpio.lz4" | head -n 1)
+    
+          if [ -z "$FOUND" ]; then
+            echo "❌ 未找到 boot.img-ramdisk.cpio.lz4 文件，终止构建。"
+            exit 1
+          else
+            echo "✅ 找到了文件：$FOUND"
+            echo "FOUND_PATH=$FOUND" >> $GITHUB_ENV
+          fi
+
+
       
       - name: Initialize and Sync Kernel Source
         run: |
-          echo "Creating folder for configuration: $CONFIG..."
+
+          echo "创建配置目录：$CONFIG"
           mkdir -p "$CONFIG"
-          
-          cp -v boot.img-ramdisk.cpio.lz4 "$CONFIG/"
+
+          echo "复制 ramdisk：$FOUND_PATH 到 $CONFIG/"
+          cp -v "$FOUND_PATH" "$CONFIG/"
           
           cd "$CONFIG"
           
