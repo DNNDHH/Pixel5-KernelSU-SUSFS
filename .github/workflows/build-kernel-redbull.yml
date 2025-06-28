@@ -260,6 +260,12 @@ jobs:
           name: dtbo.img
           path: "redbull/out/android-msm-pixel-4.19/dist/dtbo.img"
 
+      - name: dtbo_redfin.img
+        uses: actions/upload-artifact@v4
+        with:
+          name: dtbo_redfin.img
+          path: "redbull/out/android-msm-pixel-4.19/dist/dtbo_redfin.img"
+
 
 
 
