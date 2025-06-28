@@ -28,10 +28,13 @@
 - 由于使用了 专属的 vendor_ramdisk 和 ramdisk 所以只兼容 Pixel 5 设备
 
 - 不兼容 Pixel 5a (barbet) 
-- 不兼容 Pixel 4a (5G) (bramble) 
+- 不兼容 Pixel 4a (5G) (bramble)
 
 
-## 使用方法
+
+
+
+## 使用方法 - 必要时需要 恢复出厂设置 清空用户数据
 
 - fastboot flash boot boot.img
 
