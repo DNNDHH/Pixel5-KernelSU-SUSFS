@@ -201,8 +201,8 @@ jobs:
           sed -i 's/check_defconfig//' ./build.config.redbull
           sed -i 's/check_defconfig && //' ./build.config.redbull.no-cfi
 
-          sed -i '$s|echo "\$res"|echo "\-g7b0944645172-ab10812814-NekomiyaMidori"|' ./scripts/setlocalversion
-          sed -i 's/-dirty//' ./scripts/setlocalversion
+          sed -i '$s|echo "\$res"|echo "\-g7b0944645172-喵宫小绿-NekomiyaMidori"|' ./scripts/setlocalversion
+          sed -i 's/-stable//' ./scripts/setlocalversion
           
           # Run perl command to modify UTS_VERSION
           perl -pi -e 's{UTS_VERSION="\$\(echo \$UTS_VERSION \$CONFIG_FLAGS \$TIMESTAMP \| cut -b -\$UTS_LEN\)"}{UTS_VERSION="#1 SMP PREEMPT Sat Apr 20 04:20:00 UTC 2025"}' ./scripts/mkcompile_h
