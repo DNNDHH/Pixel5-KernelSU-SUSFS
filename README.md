@@ -45,5 +45,5 @@
 - fastboot reboot
 
 - [KernelSU](https://github.com/tiann/KernelSU)
-- [KernelSU.apk](https://github.com/tiann/KernelSU](https://github.com/tiann/KernelSU/releases/download/v1.0.5/KernelSU_v1.0.5_12081-release.apk )：KernelSU APK下载。
+- [KernelSU.apk](https://github.com/tiann/KernelSU/releases/download/v1.0.5/KernelSU_v1.0.5_12081-release.apk )：KernelSU APK下载。
   
