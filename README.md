@@ -25,7 +25,7 @@
 
 ## 警告⚠️
 
-- 由于使用了 专属的 vendor_ramdisk 和 boot_ramdisk 所以只兼容 Pixel 5 设备  `vendor_ramdisk.img` `boot.img`
+- 由于使用了 专属的 vendor_ramdisk 和 boot_ramdisk 所以只兼容 Pixel 5 设备  `vendor_ramdisk` `ramdisk`
 
 - 不兼容 Pixel 5a (barbet) 
 - 不兼容 Pixel 4a (5G) (bramble) 
