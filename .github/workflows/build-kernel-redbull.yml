@@ -201,7 +201,7 @@ jobs:
           sed -i 's/check_defconfig//' ./build.config.redbull
           sed -i 's/check_defconfig && //' ./build.config.redbull.no-cfi
 
-          sed -i '$s|echo "\$res"|echo "\-g7b0944645172-喵宫小绿-NekomiyaMidori"|' ./scripts/setlocalversion
+          sed -i '$s|echo "\$res"|echo "\-g7b0944645172-NekomiyaMidori-SSR"|' ./scripts/setlocalversion
           sed -i 's/-stable//' ./scripts/setlocalversion
           
           # Run perl command to modify UTS_VERSION
@@ -241,6 +241,7 @@ jobs:
           name: AnyKernel3
           path: |
             *.zip
+            
 
       - name: boot.img
         uses: actions/upload-artifact@v4
@@ -248,23 +249,40 @@ jobs:
           name: boot.img
           path: "redbull/out/android-msm-pixel-4.19/dist/boot.img"
           
+          
       - name: vendor_boot.img
         uses: actions/upload-artifact@v4
         with:
           name: vendor_boot.img
           path: "redbull/out/android-msm-pixel-4.19/dist/vendor_boot.img"
+          
 
       - name: dtbo.img
         uses: actions/upload-artifact@v4
         with:
           name: dtbo.img
           path: "redbull/out/android-msm-pixel-4.19/dist/dtbo.img"
+          
 
       - name: dtbo_redfin.img
         uses: actions/upload-artifact@v4
         with:
           name: dtbo_redfin.img
           path: "redbull/out/android-msm-pixel-4.19/dist/dtbo_redfin.img"
+
+
+      - name: aosp_arm64.img
+        uses: actions/upload-artifact@v4
+        with:
+          name: aosp_arm64.img
+          path: "redbull/prebuilts/boot-artifacts/ramdisks/ramdisk-aosp_arm64.img"
+          
+
+      - name: barbet.img
+        uses: actions/upload-artifact@v4
+        with:
+          name: barbet.img
+          path: "redbull/prebuilts/boot-artifacts/ramdisks/vendor_ramdisk-barbet.img"
 
 
 
