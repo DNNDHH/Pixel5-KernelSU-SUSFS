@@ -1,4 +1,4 @@
-name: Build redbull 4.19 Kernel
+name: Build
 
 on:
   workflow_call:  # This allows this workflow to be called from another workflow
@@ -67,36 +67,26 @@ jobs:
           # Clone repositories using the branch names
           git clone https://github.com/WildPlusKernel/AnyKernel3.git -b "$ANYKERNEL_BRANCH"
           git clone https://gitlab.com/simonpunk/susfs4ksu.git -b "$SUSFS_BRANCH"
-          git clone https://github.com/Myviforme/kernel_patches.git
-
-
-
-
-      - run: ls -l
-      
-      - run: unzip vendor_ramdisk_split.zip
+          git clone https://github.com/DNNDHH/kernel_patches.git
 
       - run: ls -l
 
-
-      - name: 🔍 Locate boot.img
+      - name: 🔍 Locate ramdisk
         id: locate_ramdisk
         run: |
           echo "📁 当前工作目录：$(pwd)"
-          echo "📦 搜索 boot.img ..."
+          echo "📦 搜索 ramdisk ..."
     
-          FOUND=$(find . -type f -name "boot.img" | head -n 1)
+          FOUND=$(find . -type f -name "ramdisk" | head -n 1)
     
           if [ -z "$FOUND" ]; then
-            echo "❌ 未找到 boot.img 文件，终止构建。重要文件。。不集成编译进去会开不了机。。哈哈"
+            echo "❌ 未找到 ramdisk 文件，终止构建。重要文件。。不集成编译进去会开不了机。。哈哈"
             exit 1
           else
             echo "✅ 找到了文件：$FOUND"
             echo "FOUND_PATH=$FOUND" >> $GITHUB_ENV
           fi
 
-
-      
       - name: Initialize and Sync Kernel Source
         run: |
 
@@ -105,7 +95,7 @@ jobs:
 
           echo "复制 ramdisk：$FOUND_PATH 到 $CONFIG/"
           cp -fv "$FOUND_PATH" "$CONFIG/"
-          cp -fv vendor_ramdisk.img "$CONFIG/"
+          cp -fv vendor_ramdisk "$CONFIG/"
           
           cd "$CONFIG"
           
@@ -117,16 +107,10 @@ jobs:
           $REPO --version
           $REPO --trace sync -c -j$(nproc --all) --no-tags --fail-fast
           
-          ls -l prebuilts/boot-artifacts/ramdisks/
-          
-          ls -l prebuilts/boot-artifacts/ramdisks/ramdisk-aosp_arm64.img
-
-          cp -fv boot.img prebuilts/boot-artifacts/ramdisks/ramdisk-aosp_arm64.img
-          cp -fv vendor_ramdisk.img prebuilts/boot-artifacts/ramdisks/vendor_ramdisk-barbet.img
-          cp -fv vendor_ramdisk.img prebuilts/boot-artifacts/ramdisks/vendor_ramdisk-redfin.img
-          cp -fv vendor_ramdisk.img prebuilts/boot-artifacts/ramdisks/vendor_ramdisk-bramble.img
-
-          ls -l prebuilts/boot-artifacts/ramdisks/ramdisk-aosp_arm64.img
+          cp -fv ramdisk prebuilts/boot-artifacts/ramdisks/ramdisk-aosp_arm64.img
+          cp -fv vendor_ramdisk prebuilts/boot-artifacts/ramdisks/vendor_ramdisk-barbet.img
+          cp -fv vendor_ramdisk prebuilts/boot-artifacts/ramdisks/vendor_ramdisk-redfin.img
+          cp -fv vendor_ramdisk prebuilts/boot-artifacts/ramdisks/vendor_ramdisk-bramble.img
 
       - name: Add KernelSU
         run: |
@@ -217,11 +201,12 @@ jobs:
           sed -i 's/check_defconfig//' ./build.config.redbull
           sed -i 's/check_defconfig && //' ./build.config.redbull.no-cfi
 
-          sed -i '$s|echo "\$res"|echo "\-Wild+"|' ./scripts/setlocalversion
+          sed -i '$s|echo "\$res"|echo "\-g7b0944645172-ab10812814-NekomiyaMidori"|' ./scripts/setlocalversion
           sed -i 's/-dirty//' ./scripts/setlocalversion
           
           # Run perl command to modify UTS_VERSION
-          perl -pi -e 's{UTS_VERSION="\$\(echo \$UTS_VERSION \$CONFIG_FLAGS \$TIMESTAMP \| cut -b -\$UTS_LEN\)"}{UTS_VERSION="#1 SMP PREEMPT Sat Apr 20 04:20:00 UTC 2024"}' ./scripts/mkcompile_h
+          perl -pi -e 's{UTS_VERSION="\$\(echo \$UTS_VERSION \$CONFIG_FLAGS \$TIMESTAMP \| cut -b -\$UTS_LEN\)"}{UTS_VERSION="#1 SMP PREEMPT Sat Apr 20 04:20:00 UTC 2025"}' ./scripts/mkcompile_h
+
 
       - name: Build the Kernel
         run: |
@@ -239,10 +224,6 @@ jobs:
           echo "Copying Image"
           cp -r ./out/android-msm-pixel-4.19/dist/Image.lz4 ../AnyKernel3/Image
           
-          ls -l ./out/android-msm-pixel-4.19/dist/boot.img
-          ls -l ./out/android-msm-pixel-4.19/dist/vendor_boot.img
-          ls -l ./out/android-msm-pixel-4.19/dist/dtbo.img
-          
           
       - name: Create ZIP Files for Different Formats
         run: |
@@ -252,35 +233,32 @@ jobs:
           ZIP_NAME="PIXEL-5-A14-KernelSU-SUSFS.zip"
           echo "Creating zip file $ZIP_NAME..."
           zip -r "../$ZIP_NAME" ./*
+
           
-      - name: 全部构建镜像
+      - name: AnyKernel3.zip
         uses: actions/upload-artifact@v4
         with:
-          name: kernel-${{ env.CONFIG }}
+          name: AnyKernel3
           path: |
             *.zip
 
-      - name: 现在在哪？
-        run: |
-          ls -l
-
-      - name: Upload boot.img
+      - name: boot.img
         uses: actions/upload-artifact@v4
         with:
           name: boot.img
-          path: "./out/android-msm-pixel-4.19/dist/boot.img"
+          path: "redbull/out/android-msm-pixel-4.19/dist/boot.img"
           
-      - name: Upload vendor_boot.img
+      - name: vendor_boot.img
         uses: actions/upload-artifact@v4
         with:
           name: vendor_boot.img
-          path: "./out/android-msm-pixel-4.19/dist/vendor_boot.img"
+          path: "redbull/out/android-msm-pixel-4.19/dist/vendor_boot.img"
 
-      - name: Upload dtbo.img
+      - name: dtbo.img
         uses: actions/upload-artifact@v4
         with:
           name: dtbo.img
-          path: "./out/android-msm-pixel-4.19/dist/dtbo.img"
+          path: "redbull/out/android-msm-pixel-4.19/dist/dtbo.img"
 
 
 

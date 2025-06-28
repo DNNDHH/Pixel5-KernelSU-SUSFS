@@ -1,4 +1,4 @@
-name: Build Pixel Kernel with KernelSU
+name: Build Pixel5 Android14 KernelSU SUSFS
 
 permissions:
   contents: read  # 不需要写入 release 或打 tag
@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       build_redbull:
-        description: 'Build redbull 4.19 kernel?'
+        description: 'Build Pixel5 Android14 KernelSU SUSFS'
         required: true
         type: boolean
         default: true
