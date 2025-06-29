@@ -214,7 +214,7 @@ jobs:
           cd "$CONFIG"
           
           echo "Building the kernel..."
-          BUILD_AOSP_KERNEL=1 ./build_redbull.sh
+          BUILD_AOSP_KERNEL=1 ./build_redbull-gki.sh
 
       - name: Create Bootimgs Folder and Copy Images
         run: |
