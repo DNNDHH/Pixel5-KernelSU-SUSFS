@@ -135,7 +135,9 @@ jobs:
           fi
           
           echo "Adding SukiSU Ultra..."
-          curl -LSs "https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/main/kernel/setup.sh" | bash -s main
+          curl -LSs "https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/main/kernel/setup.sh" | bash -s nongki
+          curl -LSs "https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/nongki/kernel/setup.sh"
+          
 
 
       - name: Add SUSFS Configuration Settings
@@ -147,7 +149,7 @@ jobs:
           
           # Add SUSFS configuration settings
           echo "CONFIG_KSU=y" >> ./arch/arm64/configs/redbull-gki_defconfig
-          echo "CONFIG_KPROBES=y" >> ./arch/arm64/configs/redbull-gki_defconfig
+          echo "CONFIG_KSU_MANUAL_HOOK=y" >> ./arch/arm64/configs/redbull-gki_defconfig
           echo "CONFIG_KPM=y" >> ./arch/arm64/configs/redbull-gki_defconfig
           echo "CONFIG_KALLSYMS=y" >> ./arch/arm64/configs/redbull-gki_defconfig
           echo "CONFIG_KALLSYMS_ALL=y" >> ./arch/arm64/configs/redbull-gki_defconfig
