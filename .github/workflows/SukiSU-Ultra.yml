@@ -114,11 +114,12 @@ jobs:
           $REPO --version
           $REPO --trace sync -c -j$(nproc --all) --no-tags --fail-fast
 
-          cd "$CONFIG/private/msm-google/"
-
+          cd private/msm-google/
+          
           git checkout 7b0944645172
 
-          cd "$CONFIG"
+          cd ..
+          cd ..
           
           cp -fv ramdisk prebuilts/boot-artifacts/ramdisks/ramdisk-aosp_arm64.img
           cp -fv vendor_ramdisk prebuilts/boot-artifacts/ramdisks/vendor_ramdisk-barbet.img
