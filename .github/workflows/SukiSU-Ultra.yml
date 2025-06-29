@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       build_redbull:
-        description: 'Build Pixel5 Android14 KernelSU SUSFS'
+        description: 'Build Pixel5 Android14 SukiSU-Ultra SUSFS'
         required: true
         type: boolean
         default: true
