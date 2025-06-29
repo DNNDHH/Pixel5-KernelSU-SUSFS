@@ -78,6 +78,22 @@ jobs:
           # Clone repositories using the branch names
           git clone https://github.com/WildPlusKernel/AnyKernel3.git -b "$ANYKERNEL_BRANCH"
 
+      - name: 🔍 Locate ramdisk
+        id: locate_ramdisk
+        run: |
+          echo "📁 当前工作目录：$(pwd)"
+          echo "📦 搜索 ramdisk ..."
+    
+          FOUND=$(find . -type f -name "ramdisk" | head -n 1)
+    
+          if [ -z "$FOUND" ]; then
+            echo "❌ 未找到 ramdisk 文件，终止构建。重要文件。。不集成编译进去会开不了机。。哈哈"
+            exit 1
+          else
+            echo "✅ 找到了文件：$FOUND"
+            echo "FOUND_PATH=$FOUND" >> $GITHUB_ENV
+          fi
+
       - name: Initialize and Sync Kernel Source
         run: |
 
