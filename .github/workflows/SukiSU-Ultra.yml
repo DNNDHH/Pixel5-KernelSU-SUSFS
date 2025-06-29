@@ -135,8 +135,8 @@ jobs:
           fi
           
           echo "Adding SukiSU Ultra..."
-
-          curl -LSs "https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/susfs-1.5.7/kernel/setup.sh" | bash -
+          
+          curl -LSs "https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/susfs-main/kernel/setup.sh" | bash -s
           
 
       - name: Add SUSFS Configuration Settings
