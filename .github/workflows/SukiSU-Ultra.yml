@@ -165,13 +165,12 @@ jobs:
           sed -i 's/check_defconfig//' ./build.config.redbull
           sed -i 's/check_defconfig && //' ./build.config.redbull.no-cfi
 
+          sed -i '$s|echo "\$res"|echo "\-g7b0944645172-ab10812814"|' ./scripts/setlocalversion
+
       - name: Build the Kernel
         run: |
           echo "Changing to configuration directory: $CONFIG..."
           cd "$CONFIG"
-
-          export LOCALVERSION="-g7b0944645172-Midori-SSR-DH"
-          export LOCALVERSION_AUTO=n
           
           echo "Building the kernel..."
           BUILD_AOSP_KERNEL=1 ./build_redbull-gki.sh
