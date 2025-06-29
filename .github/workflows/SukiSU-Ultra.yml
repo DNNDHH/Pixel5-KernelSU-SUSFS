@@ -111,7 +111,7 @@ jobs:
           
           # Initialize and sync kernel source
           echo "Initializing and syncing kernel source..."
-          $REPO init -u https://android.googlesource.com/kernel/manifest -b android-msm-redbull-4.19-android14-qpr3 --repo-rev=v2.54 --depth=1
+          $REPO init -u https://android.googlesource.com/kernel/manifest -b android-msm-redbull-4.19-android14-qpr3 --repo-rev=v2.54
 
           # Sync repo and apply patches
           $REPO --version
@@ -157,7 +157,9 @@ jobs:
         run: |
           echo "Changing to configuration directory: $CONFIG..."
           cd "$CONFIG/private/msm-google/"
-          
+
+          git checkout 7b0944645172
+
           echo "Running sed commands..."
           
           # Run sed commands for modifications
