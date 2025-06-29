@@ -61,6 +61,9 @@ jobs:
           # Install dependencies
           sudo apt update
           sudo apt install build-essential flex bison libssl-dev libelf-dev libncurses5-dev gcc-aarch64-linux-gnu make
+          
+          sudo timedatectl set-ntp true
+          sudo timedatectl status
 
       - name: Clone AnyKernel3 and Other Dependencies
         run: |
@@ -68,34 +71,12 @@ jobs:
     
           # Define the branch names using the matrix values
           ANYKERNEL_BRANCH="android-4.19"
-          SUSFS_BRANCH="kernel-4.19"
 
           # Debug print the branches
           echo "Using branch for AnyKernel3: $ANYKERNEL_BRANCH"
-          echo "Using branch for SUSFS: $SUSFS_BRANCH"
 
           # Clone repositories using the branch names
           git clone https://github.com/WildPlusKernel/AnyKernel3.git -b "$ANYKERNEL_BRANCH"
-          git clone https://gitlab.com/simonpunk/susfs4ksu.git -b "$SUSFS_BRANCH"
-          git clone https://github.com/DNNDHH/kernel_patches.git
-
-      - run: ls -l
-
-      - name: 🔍 Locate ramdisk
-        id: locate_ramdisk
-        run: |
-          echo "📁 当前工作目录：$(pwd)"
-          echo "📦 搜索 ramdisk ..."
-    
-          FOUND=$(find . -type f -name "ramdisk" | head -n 1)
-    
-          if [ -z "$FOUND" ]; then
-            echo "❌ 未找到 ramdisk 文件，终止构建。重要文件。。不集成编译进去会开不了机。。哈哈"
-            exit 1
-          else
-            echo "✅ 找到了文件：$FOUND"
-            echo "FOUND_PATH=$FOUND" >> $GITHUB_ENV
-          fi
 
       - name: Initialize and Sync Kernel Source
         run: |
@@ -116,6 +97,12 @@ jobs:
           # Sync repo and apply patches
           $REPO --version
           $REPO --trace sync -c -j$(nproc --all) --no-tags --fail-fast
+
+          cd "$CONFIG/private/msm-google/"
+
+          git checkout 7b0944645172
+
+          cd "$CONFIG"
           
           cp -fv ramdisk prebuilts/boot-artifacts/ramdisks/ramdisk-aosp_arm64.img
           cp -fv vendor_ramdisk prebuilts/boot-artifacts/ramdisks/vendor_ramdisk-barbet.img
@@ -126,17 +113,9 @@ jobs:
           echo "Changing to configuration directory: $CONFIG..."
           cd "$CONFIG/private/msm-google/"
           
-          COMMIT_ID="7b0944645172"
-          if git rev-parse --quiet --verify "$COMMIT_ID^{commit}"; then
-              echo "✅ Found commit $COMMIT_ID, checking out..."
-              git checkout $COMMIT_ID
-          else
-              echo "⚠️ Commit $COMMIT_ID not found, skipping checkout."
-          fi
-          
           echo "Adding SukiSU Ultra..."
           
-          curl -LSs "https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/susfs-main/kernel/setup.sh" | bash -s
+          curl -LSs "https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/main/kernel/setup.sh" | bash -s nongki
           
 
       - name: Add SUSFS Configuration Settings
@@ -157,8 +136,6 @@ jobs:
         run: |
           echo "Changing to configuration directory: $CONFIG..."
           cd "$CONFIG/private/msm-google/"
-
-          git checkout 7b0944645172
 
           echo "Running sed commands..."
           
