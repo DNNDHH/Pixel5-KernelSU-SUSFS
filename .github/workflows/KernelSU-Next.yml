@@ -11,8 +11,8 @@ on:
         description: 'Build redbull 4.19 kernel?'
         required: true
         type: boolean
-        default: true # This allows this workflow to be called from another workflow
-  
+        default: true
+
 jobs:
   build-kernel-4-19-kernelsu-susfs:
     runs-on: ubuntu-22.04
@@ -21,9 +21,9 @@ jobs:
       - name: Maximize build space
         uses: easimon/maximize-build-space@master
         with:
-          root-reserve-mb: 8192    # 8GB for root memory reservation
-          temp-reserve-mb: 2048     # 2GB for temporary memory reservation
-          swap-size-mb: 8192       # 8GB for swap size
+          root-reserve-mb: 8192
+          temp-reserve-mb: 2048
+          swap-size-mb: 8192
           remove-dotnet: 'true'
           remove-android: 'true'
           remove-haskell: 'true'
@@ -32,7 +32,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-
       - name: Get build space
         run: |
           free -h
@@ -40,17 +39,12 @@ jobs:
 
       - name: Set CONFIG Environment Variable
         run: |
-          # Set CONFIG dynamically based on matrix values
           CONFIG="redbull"
-          
-          # Set CONFIG as an environment variable for future steps
           echo "CONFIG=$CONFIG" >> $GITHUB_ENV
-          
           echo "CONFIG set to: $CONFIG"
 
       - name: Install Repo
         run: |
-          # Install dependencies
           mkdir -p ./git-repo
           curl https://storage.googleapis.com/git-repo-downloads/repo > ./git-repo/repo
           chmod a+rx ./git-repo/repo
@@ -58,23 +52,16 @@ jobs:
 
       - name: Install Others
         run: |
-          # Install dependencies
           sudo apt update
           sudo apt install build-essential flex bison libssl-dev libelf-dev libncurses5-dev gcc-aarch64-linux-gnu make
 
       - name: Clone AnyKernel3 and Other Dependencies
         run: |
           echo "Cloning AnyKernel3 and other dependencies..."
-    
-          # Define the branch names using the matrix values
-          ANYKERNEL_BRANCH="android-4.19"
+          ANYKERNEL_BRANCH="main"
           SUSFS_BRANCH="kernel-4.19"
-
-          # Debug print the branches
           echo "Using branch for AnyKernel3: $ANYKERNEL_BRANCH"
           echo "Using branch for SUSFS: $SUSFS_BRANCH"
-
-          # Clone repositories using the branch names
           git clone https://github.com/WildPlusKernel/AnyKernel3.git -b "$ANYKERNEL_BRANCH"
           git clone https://gitlab.com/simonpunk/susfs4ksu.git -b "$SUSFS_BRANCH"
           git clone https://github.com/Myviforme/kernel_patches.git
@@ -86,9 +73,7 @@ jobs:
         run: |
           echo "📁 当前工作目录：$(pwd)"
           echo "📦 搜索 ramdisk ..."
-    
           FOUND=$(find . -type f -name "ramdisk" | head -n 1)
-    
           if [ -z "$FOUND" ]; then
             echo "❌ 未找到 ramdisk 文件，终止构建。重要文件。。不集成编译进去会开不了机。。哈哈"
             exit 1
@@ -99,24 +84,16 @@ jobs:
 
       - name: Initialize and Sync Kernel Source
         run: |
-
           echo "创建配置目录：$CONFIG"
           mkdir -p "$CONFIG"
-
           echo "复制 ramdisk：$FOUND_PATH 到 $CONFIG/"
           cp -fv "$FOUND_PATH" "$CONFIG/"
           cp -fv vendor_ramdisk "$CONFIG/"
-          
           cd "$CONFIG"
-          
-          # Initialize and sync kernel source
           echo "Initializing and syncing kernel source..."
           $REPO init -u https://android.googlesource.com/kernel/manifest -b android-msm-redbull-4.19-android14-qpr3 --repo-rev=v2.54 --depth=1
-
-          # Sync repo and apply patches
           $REPO --version
           $REPO --trace sync -c -j$(nproc --all) --no-tags --fail-fast
-          
           cp -fv ramdisk prebuilts/boot-artifacts/ramdisks/ramdisk-aosp_arm64.img
           cp -fv vendor_ramdisk prebuilts/boot-artifacts/ramdisks/vendor_ramdisk-barbet.img
           cp -fv vendor_ramdisk prebuilts/boot-artifacts/ramdisks/vendor_ramdisk-redfin.img
@@ -126,7 +103,6 @@ jobs:
         run: |
           echo "Changing to configuration directory: $CONFIG..."
           cd "$CONFIG/private/msm-google/"
-          
           COMMIT_ID="7b0944645172"
           if git rev-parse --quiet --verify "$COMMIT_ID^{commit}"; then
               echo "✅ Found commit $COMMIT_ID, checking out..."
@@ -134,31 +110,20 @@ jobs:
           else
               echo "⚠️ Commit $COMMIT_ID not found, skipping checkout."
           fi
-          
           echo "Adding KernelSU..."
           curl -LSs "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh" | bash -
-          #cd ./KernelSU-Next/kernel
-          #sed -i 's/ccflags-y += -DKSU_VERSION=16/ccflags-y += -DKSU_VERSION=12321/' ./Makefile
 
       - name: Apply SUSFS Patches
         run: |
           echo "Changing to configuration directory: $CONFIG..."
           cd "$CONFIG/private/msm-google/"
-          
           echo "Applying SUSFS patches..."
-          
-          # Copy SUSFS patches
           cp ../../../susfs4ksu/kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch ./KernelSU-Next/
           cp ../../../susfs4ksu/kernel_patches/50_add_susfs_in_kernel-4.19.patch ./
           cp ../../../susfs4ksu/kernel_patches/fs/* ./fs/
           cp ../../../susfs4ksu/kernel_patches/include/linux/* ./include/linux/
-
           cd ./KernelSU
-          
-          # Apply SUSFS patch for KernelSU
           patch -p1 --fuzz=3 < 10_enable_susfs_for_ksu.patch || true
-          
-          # Change to common directory and apply SUSFS patch
           cd ..
           patch -p1 --fuzz=3 < 50_add_susfs_in_kernel-4.19.patch || true
 
@@ -166,7 +131,6 @@ jobs:
         run: |
           echo "Changing to configuration directory: $CONFIG..."
           cd "$CONFIG/private/msm-google/"
-          # Apply additional patch
           cp ../../../kernel_patches/ksu_hooks_4.19.patch ./
           patch -p1 --fuzz=3 < ./ksu_hooks_4.19.patch
 
@@ -174,10 +138,7 @@ jobs:
         run: |
           echo "Changing to configuration directory: $CONFIG..."
           cd "$CONFIG/private/msm-google/"
-          
           echo "Adding configuration settings to redbull_defconfig..."
-          
-          # Add SUSFS configuration settings
           echo "CONFIG_KSU=y" >> ./arch/arm64/configs/redbull_defconfig
           echo "CONFIG_KSU_SUSFS=y" >> ./arch/arm64/configs/redbull_defconfig
           echo "CONFIG_KSU_SUSFS_HAS_MAGIC_MOUNT=y" >> ./arch/arm64/configs/redbull_defconfig
@@ -195,33 +156,24 @@ jobs:
           echo "CONFIG_KSU_SUSFS_SPOOF_CMDLINE_OR_BOOTCONFIG=y" >> ./arch/arm64/configs/redbull_defconfig
           echo "CONFIG_KSU_SUSFS_OPEN_REDIRECT=y" >> ./arch/arm64/configs/redbull_defconfig
           echo "CONFIG_KSU_SUSFS_SUS_SU=n" >> ./arch/arm64/configs/redbull_defconfig
-          
-          # Add additional tmpfs config setting
           echo "CONFIG_TMPFS_XATTR=y" >> ./arch/arm64/configs/redbull_defconfig
 
       - name: Run sed and perl Commands
         run: |
           echo "Changing to configuration directory: $CONFIG..."
           cd "$CONFIG/private/msm-google/"
-          
           echo "Running sed commands..."
-          
-          # Run sed commands for modifications
           sed -i 's/check_defconfig//' ./build.config.common
           sed -i 's/check_defconfig//' ./build.config.redbull
           sed -i 's/check_defconfig && //' ./build.config.redbull.no-cfi
-
           sed -i '$s|echo "\$res"|echo "\-g7b0944645172-ab10812814-NekomayaMidori"|' ./scripts/setlocalversion
           sed -i 's/-dirty//' ./scripts/setlocalversion
-          
-          # Run perl command to modify UTS_VERSION
           perl -pi -e 's{UTS_VERSION="\$\(echo \$UTS_VERSION \$CONFIG_FLAGS \$TIMESTAMP \| cut -b -\$UTS_LEN\)"}{UTS_VERSION="#1 SMP PREEMPT Sat Apr 20 04:20:00 UTC 2025"}' ./scripts/mkcompile_h
 
       - name: Build the Kernel
         run: |
           echo "Changing to configuration directory: $CONFIG..."
           cd "$CONFIG"
-          
           echo "Building the kernel..."
           BUILD_AOSP_KERNEL=1 ./build_redbull.sh
 
@@ -229,21 +181,17 @@ jobs:
         run: |
           echo "Changing to configuration directory: $CONFIG..."
           cd "$CONFIG"
-          
           echo "Copying Image"
           cp -r ./out/android-msm-pixel-4.19/dist/Image.lz4 ../AnyKernel3/Image
-          
-          
+
       - name: Create ZIP Files for Different Formats
         run: |
           echo "Creating zip files for all formats..."
           cd ./AnyKernel3
-          
           ZIP_NAME="PIXEL-5-A14-KernelSU-SUSFS.zip"
           echo "Creating zip file $ZIP_NAME..."
           zip -r "../$ZIP_NAME" ./*
 
-          
       - name: AnyKernel3
         uses: actions/upload-artifact@v4
         with:
@@ -256,7 +204,7 @@ jobs:
         with:
           name: boot.img
           path: "redbull/out/android-msm-pixel-4.19/dist/boot.img"
-          
+
       - name: vendor_boot.img
         uses: actions/upload-artifact@v4
         with:
@@ -268,19 +216,3 @@ jobs:
         with:
           name: dtbo.img
           path: "redbull/out/android-msm-pixel-4.19/dist/dtbo.img"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
