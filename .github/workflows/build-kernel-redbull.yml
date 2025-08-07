@@ -67,8 +67,7 @@ jobs:
           # Clone repositories using the branch names
           git clone https://github.com/osm0sis/AnyKernel3.git -b "$ANYKERNEL_BRANCH"
           git clone https://github.com/backslashxx/susfs4ksu.git -b "$SUSFS_BRANCH"
-          git clone https://github.com/DNNDHH/kernel_patches.git
-          git clone https://github.com/DNNDHH/kernel_patches.git
+          git clone https://github.com/Myviforme/kernel_patches.git
 
       - run: ls -l
 
