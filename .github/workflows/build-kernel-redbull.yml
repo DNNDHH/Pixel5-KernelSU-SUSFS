@@ -20,7 +20,7 @@ jobs:
           remove-codeql: 'true'
           
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
 
       - name: Get build space
@@ -57,16 +57,16 @@ jobs:
           echo "Cloning AnyKernel3 and other dependencies..."
     
           # Define the branch names using the matrix values
-          ANYKERNEL_BRANCH="android-4.19"
-          SUSFS_BRANCH="kernel-4.19"
+          ANYKERNEL_BRANCH="master"
+          SUSFS_BRANCH="master"
 
           # Debug print the branches
           echo "Using branch for AnyKernel3: $ANYKERNEL_BRANCH"
           echo "Using branch for SUSFS: $SUSFS_BRANCH"
 
           # Clone repositories using the branch names
-          git clone https://github.com/WildPlusKernel/AnyKernel3.git -b "$ANYKERNEL_BRANCH"
-          git clone https://gitlab.com/simonpunk/susfs4ksu.git -b "$SUSFS_BRANCH"
+          git clone https://github.com/osm0sis/AnyKernel3.git -b "$ANYKERNEL_BRANCH"
+          git clone https://github.com/backslashxx/susfs4ksu.git -b "$SUSFS_BRANCH"
           git clone https://github.com/DNNDHH/kernel_patches.git
 
       - run: ls -l
