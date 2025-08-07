@@ -128,6 +128,56 @@ jobs:
           cd ..
           patch -p1 --fuzz=3 < 50_add_susfs_in_kernel-4.19.patch || true
 
+      - name: Add SUSFS Configuration Settings
+        run: |
+          echo "Changing to configuration directory: $CONFIG..."
+          cd "$CONFIG/private/msm-google/"
+          
+          echo "Adding configuration settings to redbull_defconfig..."
+          
+          # Add SUSFS configuration settings
+          echo "CONFIG_KSU=y" >> ./arch/arm64/configs/redbull_defconfig
+          echo "CONFIG_KSU_SUSFS=y" >> ./arch/arm64/configs/redbull_defconfig
+          echo "CONFIG_KSU_SUSFS_HAS_MAGIC_MOUNT=y" >> ./arch/arm64/configs/redbull_defconfig
+          echo "CONFIG_KSU_SUSFS_SUS_PATH=y" >> ./arch/arm64/configs/redbull_defconfig
+          echo "CONFIG_KSU_SUSFS_SUS_MOUNT=y" >> ./arch/arm64/configs/redbull_defconfig
+          echo "CONFIG_KSU_SUSFS_AUTO_ADD_SUS_KSU_DEFAULT_MOUNT=y" >> ./arch/arm64/configs/redbull_defconfig
+          echo "CONFIG_KSU_SUSFS_AUTO_ADD_SUS_BIND_MOUNT=y" >> ./arch/arm64/configs/redbull_defconfig
+          echo "CONFIG_KSU_SUSFS_SUS_KSTAT=y" >> ./arch/arm64/configs/redbull_defconfig
+          echo "CONFIG_KSU_SUSFS_SUS_OVERLAYFS=y" >> ./arch/arm64/configs/redbull_defconfig
+          echo "CONFIG_KSU_SUSFS_TRY_UMOUNT=y" >> ./arch/arm64/configs/redbull_defconfig
+          echo "CONFIG_KSU_SUSFS_AUTO_ADD_TRY_UMOUNT_FOR_BIND_MOUNT=y" >> ./arch/arm64/configs/redbull_defconfig
+          echo "CONFIG_KSU_SUSFS_SPOOF_UNAME=y" >> ./arch/arm64/configs/redbull_defconfig
+          echo "CONFIG_KSU_SUSFS_ENABLE_LOG=y" >> ./arch/arm64/configs/redbull_defconfig
+          echo "CONFIG_KSU_SUSFS_HIDE_KSU_SUSFS_SYMBOLS=y" >> ./arch/arm64/configs/redbull_defconfig
+          echo "CONFIG_KSU_SUSFS_SPOOF_CMDLINE_OR_BOOTCONFIG=y" >> ./arch/arm64/configs/redbull_defconfig
+          echo "CONFIG_KSU_SUSFS_OPEN_REDIRECT=y" >> ./arch/arm64/configs/redbull_defconfig
+          echo "CONFIG_KSU_SUSFS_SUS_SU=n" >> ./arch/arm64/configs/redbull_defconfig
+          
+          # Add additional tmpfs config setting
+          echo "CONFIG_TMPFS_XATTR=y" >> ./arch/arm64/configs/redbull_defconfig
+
+      - name: Run sed and perl Commands
+        run: |
+          echo "Changing to configuration directory: $CONFIG..."
+          cd "$CONFIG/private/msm-google/"
+          
+          export LOCALVERSION="-g7b0944645172-ab10812814-NekomiyaMidori-SSR"
+          export LOCALVERSION_AUTO=n
+          
+          echo "Running sed commands..."
+          
+          # Run sed commands for modifications
+          sed -i 's/check_defconfig//' ./build.config.common
+          sed -i 's/check_defconfig//' ./build.config.redbull
+          sed -i 's/check_defconfig && //' ./build.config.redbull.no-cfi
+
+          sed -i '$s|echo "\$res"|echo "\-g7b0944645172-ab10812814-NekomiyaMidori-SSR"|' ./scripts/setlocalversion
+          sed -i 's/-stable//' ./scripts/setlocalversion
+          
+          # Run perl command to modify UTS_VERSION
+          perl -pi -e 's{UTS_VERSION="\$\(echo \$UTS_VERSION \$CONFIG_FLAGS \$TIMESTAMP \| cut -b -\$UTS_LEN\)"}{UTS_VERSION="#1 SMP PREEMPT Sat Apr 20 04:20:00 UTC 2025"}' ./scripts/mkcompile_h
+
       - name: Apply KSU Hooks
         run: |
           echo "Changing to configuration directory: $CONFIG..."
@@ -177,6 +227,7 @@ jobs:
           cd "$CONFIG"
           echo "Building the kernel..."
           BUILD_AOSP_KERNEL=1 ./build_redbull.sh
+        timeout-minutes: 120
 
       - name: Create Bootimgs Folder and Copy Images
         run: |

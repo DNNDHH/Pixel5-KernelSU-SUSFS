@@ -68,6 +68,7 @@ jobs:
           git clone https://github.com/osm0sis/AnyKernel3.git -b "$ANYKERNEL_BRANCH"
           git clone https://github.com/backslashxx/susfs4ksu.git -b "$SUSFS_BRANCH"
           git clone https://github.com/DNNDHH/kernel_patches.git
+          git clone https://github.com/DNNDHH/kernel_patches.git
 
       - run: ls -l
 
@@ -134,7 +135,6 @@ jobs:
         run: |
           echo "Changing to configuration directory: $CONFIG..."
           cd "$CONFIG/private/msm-google/"
-          
           echo "Applying SUSFS patches..."
           
           # Copy SUSFS patches
@@ -215,6 +215,7 @@ jobs:
           
           echo "Building the kernel..."
           BUILD_AOSP_KERNEL=1 ./build_redbull-gki.sh
+        timeout-minutes: 120
 
       - name: Create Bootimgs Folder and Copy Images
         run: |

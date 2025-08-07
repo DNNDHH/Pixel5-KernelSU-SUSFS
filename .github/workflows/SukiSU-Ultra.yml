@@ -77,6 +77,7 @@ jobs:
 
           # Clone repositories using the branch names
           git clone https://github.com/osm0sis/AnyKernel3.git -b "$ANYKERNEL_BRANCH"
+          git clone https://github.com/Myviforme/kernel_patches.git
 
       - name: 🔍 Locate ramdisk
         id: locate_ramdisk
@@ -169,6 +170,7 @@ jobs:
           
           echo "Building the kernel..."
           BUILD_AOSP_KERNEL=1 ./build_redbull-gki.sh
+        timeout-minutes: 120
 
       - name: Create Bootimgs Folder and Copy Images
         run: |
