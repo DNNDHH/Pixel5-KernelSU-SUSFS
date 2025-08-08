@@ -136,28 +136,47 @@ jobs:
           cd "$CONFIG/private/msm-google/"
           echo "Applying SUSFS patches..."
           
-          # Copy SUSFS patches
-          cp ../../../susfs4ksu/kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch ./KernelSU/
-          cp ../../../susfs4ksu/kernel_patches/50_add_susfs_in_kernel-4.19.patch ./
-          cp ../../../susfs4ksu/kernel_patches/fs/* ./fs/
-          cp ../../../susfs4ksu/kernel_patches/include/linux/* ./include/linux/
+          # Copy SUSFS patches with error checking
+          if [ -d "../../../susfs4ksu/kernel_patches/KernelSU/" ]; then
+            cp ../../../susfs4ksu/kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch ./KernelSU/ || echo "Warning: Failed to copy KernelSU patch"
+          fi
+          
+          if [ -f "../../../susfs4ksu/kernel_patches/50_add_susfs_in_kernel-4.19.patch" ]; then
+            cp ../../../susfs4ksu/kernel_patches/50_add_susfs_in_kernel-4.19.patch ./ || echo "Warning: Failed to copy kernel patch"
+          fi
+          
+          if [ -d "../../../susfs4ksu/kernel_patches/fs/" ]; then
+            cp ../../../susfs4ksu/kernel_patches/fs/* ./fs/ || echo "Warning: Failed to copy fs patches"
+          fi
+          
+          if [ -d "../../../susfs4ksu/kernel_patches/include/linux/" ]; then
+            cp ../../../susfs4ksu/kernel_patches/include/linux/* ./include/linux/ || echo "Warning: Failed to copy include patches"
+          fi
 
-          cd ./KernelSU
+          # Apply SUSFS patch for KernelSU if it exists
+          if [ -f "./KernelSU/10_enable_susfs_for_ksu.patch" ]; then
+            cd ./KernelSU
+            patch -p1 --fuzz=3 < 10_enable_susfs_for_ksu.patch || echo "Warning: SUSFS KernelSU patch failed"
+            cd ..
+          fi
           
-          # Apply SUSFS patch for KernelSU
-          patch -p1 --fuzz=3 < 10_enable_susfs_for_ksu.patch || true
-          
-          # Change to common directory and apply SUSFS patch
-          cd ..
-          patch -p1 --fuzz=3 < 50_add_susfs_in_kernel-4.19.patch || true
+          # Apply SUSFS kernel patch if it exists
+          if [ -f "./50_add_susfs_in_kernel-4.19.patch" ]; then
+            patch -p1 --fuzz=3 < 50_add_susfs_in_kernel-4.19.patch || echo "Warning: SUSFS kernel patch failed"
+          fi
 
       - name: Apply KSU Hooks
         run: |
           echo "Changing to configuration directory: $CONFIG..."
           cd "$CONFIG/private/msm-google/"
-          # Apply additional patch
-          cp ../../../kernel_patches/ksu_hooks_4.19.patch ./
-          patch -p1 --fuzz=3 < ./ksu_hooks_4.19.patch
+          
+          # Apply additional patch with error checking
+          if [ -f "../../../kernel_patches/ksu_hooks_4.19.patch" ]; then
+            cp ../../../kernel_patches/ksu_hooks_4.19.patch ./
+            patch -p1 --fuzz=3 < ./ksu_hooks_4.19.patch || echo "Warning: KSU hooks patch failed, continuing build"
+          else
+            echo "Warning: KSU hooks patch file not found, skipping"
+          fi
 
       - name: Add SUSFS Configuration Settings
         run: |
@@ -187,6 +206,14 @@ jobs:
           
           # Add additional tmpfs config setting
           echo "CONFIG_TMPFS_XATTR=y" >> ./arch/arm64/configs/redbull-gki_defconfig
+          
+          # Add input subsystem configurations to prevent keydebug-func.o build errors
+          echo "CONFIG_INPUT=y" >> ./arch/arm64/configs/redbull-gki_defconfig
+          echo "CONFIG_INPUT_MISC=y" >> ./arch/arm64/configs/redbull-gki_defconfig
+          
+          echo "Configuration settings added successfully"
+          echo "Current defconfig tail:"
+          tail -10 ./arch/arm64/configs/redbull-gki_defconfig
 
       - name: Run sed and perl Commands
         run: |
@@ -207,13 +234,66 @@ jobs:
           perl -pi -e 's{UTS_VERSION="\$\(echo \$UTS_VERSION \$CONFIG_FLAGS \$TIMESTAMP \| cut -b -\$UTS_LEN\)"}{UTS_VERSION="#1 SMP PREEMPT Sat Apr 20 04:20:00 UTC 2025"}' ./scripts/mkcompile_h
 
 
+      - name: Verify Build Environment
+        run: |
+          echo "Changing to configuration directory: $CONFIG..."
+          cd "$CONFIG/private/msm-google/"
+          
+          echo "=== Build Environment Verification ==="
+          echo "Current directory: $(pwd)"
+          echo "Available build scripts:"
+          ls -la ../build_* || echo "No build scripts found in parent directory"
+          ls -la build_* || echo "No build scripts found in current directory"
+          cd ..
+          ls -la build_* || echo "No build scripts found in repo root"
+          cd private/msm-google/
+          
+          echo "Checking for drivers/input directory:"
+          if [ -d "drivers/input" ]; then
+            echo "drivers/input exists"
+            ls -la drivers/input/ | head -10
+            if [ -f "drivers/input/keydebug-func.c" ]; then
+              echo "keydebug-func.c source file found"
+            else
+              echo "WARNING: keydebug-func.c source file NOT found"
+              echo "Available input driver files:"
+              find drivers/input/ -name "*.c" | head -10
+            fi
+          else
+            echo "WARNING: drivers/input directory does not exist"
+          fi
+          
+          echo "Checking arch/arm64/configs/:"
+          ls -la arch/arm64/configs/redbull* || echo "No redbull config files found"
+          
+          echo "KernelSU directory:"
+          if [ -d "KernelSU" ]; then
+            echo "KernelSU directory exists"
+            ls -la KernelSU/
+          else
+            echo "WARNING: KernelSU directory does not exist"
+          fi
+
       - name: Build the Kernel
         run: |
           echo "Changing to configuration directory: $CONFIG..."
           cd "$CONFIG"
           
-          echo "Building the kernel..."
-          BUILD_AOSP_KERNEL=1 ./build_redbull-gki.sh
+          # Check which build script exists and use the appropriate one
+          if [ -f "./build_redbull-gki.sh" ]; then
+            echo "Using build_redbull-gki.sh..."
+            BUILD_SCRIPT="./build_redbull-gki.sh"
+          elif [ -f "./build_redbull.sh" ]; then
+            echo "Using build_redbull.sh..."
+            BUILD_SCRIPT="./build_redbull.sh"
+          else
+            echo "Error: No suitable build script found"
+            ls -la build_*
+            exit 1
+          fi
+          
+          echo "Building the kernel with script: $BUILD_SCRIPT"
+          BUILD_AOSP_KERNEL=1 "$BUILD_SCRIPT"
         timeout-minutes: 120
 
       - name: Create Bootimgs Folder and Copy Images

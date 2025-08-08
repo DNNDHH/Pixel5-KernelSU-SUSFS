@@ -1,0 +1,23 @@
+# Extracted ramdisk files (temporary analysis files)
+extracted_ramdisk/
+extracted_vendor_ramdisk/
+ramdisk_decompressed
+vendor_ramdisk_decompressed
+
+# Build artifacts
+*.o
+*.a
+*.so
+*.ko
+*.img
+*.zip
+out/
+build/
+.config
+.tmp_*
+
+# Temporary files
+*.tmp
+*.swp
+*.bak
+*~
