@@ -33,7 +33,7 @@ jobs:
           remove-codeql: 'true'
           
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
 
       - name: Get build space
@@ -103,6 +103,7 @@ jobs:
           
           echo "Building the kernel..."
           BUILD_AOSP_KERNEL=1 ./build_redbull.sh
+        timeout-minutes: 120
 
       - name: boot.img
         uses: actions/upload-artifact@v4

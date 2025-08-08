@@ -30,7 +30,7 @@ jobs:
           remove-codeql: 'true'
           
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
 
       - name: Get build space
@@ -70,13 +70,14 @@ jobs:
           echo "Cloning AnyKernel3 and other dependencies..."
     
           # Define the branch names using the matrix values
-          ANYKERNEL_BRANCH="android-4.19"
+          ANYKERNEL_BRANCH="master"
 
           # Debug print the branches
           echo "Using branch for AnyKernel3: $ANYKERNEL_BRANCH"
 
           # Clone repositories using the branch names
-          git clone https://github.com/WildPlusKernel/AnyKernel3.git -b "$ANYKERNEL_BRANCH"
+          git clone https://github.com/osm0sis/AnyKernel3.git -b "$ANYKERNEL_BRANCH"
+          git clone https://github.com/Myviforme/kernel_patches.git
 
       - name: 🔍 Locate ramdisk
         id: locate_ramdisk
@@ -131,8 +132,7 @@ jobs:
           cd "$CONFIG/private/msm-google/"
           
           echo "Adding SukiSU Ultra..."
-          
-          curl -LSs "https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/main/kernel/setup.sh" | bash -s nongki
+          curl -LSs "https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/main/kernel/setup.sh" | bash -s main
           
 
       - name: Add SUSFS Configuration Settings
@@ -170,6 +170,7 @@ jobs:
           
           echo "Building the kernel..."
           BUILD_AOSP_KERNEL=1 ./build_redbull-gki.sh
+        timeout-minutes: 120
 
       - name: Create Bootimgs Folder and Copy Images
         run: |
