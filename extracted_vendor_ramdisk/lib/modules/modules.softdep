@@ -1,0 +1,11 @@
+# Soft dependencies extracted from modules themselves.
+softdep qcom_pdc pre: watchdog_v2
+softdep qcom_pdc pre: early_random
+softdep qmi_helpers pre: qrtr
+softdep qpnp_pdphy pre: arm_smmu
+softdep governor_msm_adreno_tz pre: governor_bw_vbif governor_gpubw_mon
+softdep qcom_hwspinlock pre: qcom-cpufreq-hw
+softdep smem pre: qcom_hwspinlock
+softdep phy_qcom_ufs pre: watchdog_v2
+softdep phy_qcom_ufs pre: early_random
+softdep qcom_spmi_wled pre: devfreq_qcom_fw

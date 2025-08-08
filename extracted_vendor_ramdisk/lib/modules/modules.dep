@@ -1,0 +1,218 @@
+/lib/modules/sm7250_bms.ko: /lib/modules/pmic-voter.ko /lib/modules/google-bms.ko /lib/modules/qpnp-revid.ko
+/lib/modules/adsprpc_compat.ko:
+/lib/modules/msm_adreno.ko: /lib/modules/devfreq_devbw.ko /lib/modules/msm_bus.ko /lib/modules/governor_bw_vbif.ko /lib/modules/secure_buffer.ko /lib/modules/governor_msm_adreno_tz.ko /lib/modules/qtee_shm_bridge.ko /lib/modules/cmd-db.ko /lib/modules/llcc-slice.ko /lib/modules/subsystem-restart.ko /lib/modules/qmi_helpers.ko /lib/modules/smem_state.ko /lib/modules/msm_ipc_logging.ko /lib/modules/subsystem_notif.ko
+/lib/modules/msm_bus.ko:
+/lib/modules/minidump_log.ko: /lib/modules/msm_minidump.ko /lib/modules/smem.ko
+/lib/modules/dispcc-lito.ko: /lib/modules/clk-qcom.ko /lib/modules/msm_bus.ko
+/lib/modules/xhci-plat-hcd.ko:
+/lib/modules/qpnp-power-on.ko:
+/lib/modules/smp2p_sleepstate.ko: /lib/modules/smem_state.ko
+/lib/modules/ebtables.ko:
+/lib/modules/overheat_mitigation.ko: /lib/modules/pmic-voter.ko
+/lib/modules/eud.ko: /lib/modules/qtee_shm_bridge.ko
+/lib/modules/qce50.ko: /lib/modules/msm_sps.ko /lib/modules/msm_ipc_logging.ko
+/lib/modules/ufshcd-pltfrm.ko: /lib/modules/ufshcd-core.ko
+/lib/modules/citadel-spi.ko:
+/lib/modules/diagchar.ko: /lib/modules/usb_f_diag.ko /lib/modules/rpmsg_core.ko /lib/modules/msm-poweroff.ko /lib/modules/watchdog_v2.ko /lib/modules/qpnp-power-on.ko /lib/modules/qcom_socinfo.ko /lib/modules/msm_minidump.ko /lib/modules/smem.ko /lib/modules/qtee_shm_bridge.ko /lib/modules/qmi_helpers.ko /lib/modules/msm_ipc_logging.ko /lib/modules/subsystem_notif.ko
+/lib/modules/governor_bw_hwmon.ko:
+/lib/modules/usb-dwc3-msm.ko: /lib/modules/dwc3.ko /lib/modules/msm_bus.ko /lib/modules/msm_ipc_logging.ko /lib/modules/pmic-voter.ko
+/lib/modules/of_slimbus.ko: /lib/modules/slimbus.ko
+/lib/modules/pinctrl-lito.ko: /lib/modules/pinctrl-msm.ko
+/lib/modules/qcom-pdc.ko: /lib/modules/msm_ipc_logging.ko
+/lib/modules/gcc-lito.ko: /lib/modules/clk-qcom.ko /lib/modules/msm_bus.ko
+/lib/modules/qtee_shm_bridge.ko:
+/lib/modules/smem_state.ko:
+/lib/modules/google_charger.ko: /lib/modules/tcpm.ko /lib/modules/roles.ko /lib/modules/logbuffer.ko /lib/modules/pmic-voter.ko /lib/modules/google-bms.ko
+/lib/modules/roles.ko:
+/lib/modules/cpu_isolate.ko:
+/lib/modules/msm_npu.ko: /lib/modules/cdsprm.ko /lib/modules/rpmsg_core.ko /lib/modules/devfreq_devbw.ko /lib/modules/msm_bus.ko /lib/modules/llcc-slice.ko /lib/modules/subsystem-restart.ko /lib/modules/qmi_helpers.ko /lib/modules/smem_state.ko /lib/modules/msm_ipc_logging.ko /lib/modules/subsystem_notif.ko
+/lib/modules/clk-qcom.ko: /lib/modules/msm_bus.ko
+/lib/modules/usb_f_gsi.ko: /lib/modules/usb-dwc3-msm.ko /lib/modules/dwc3.ko /lib/modules/rndis.ko /lib/modules/ipa3.ko /lib/modules/msm_gsi.ko /lib/modules/smem.ko /lib/modules/msm_bus.ko /lib/modules/qtee_shm_bridge.ko /lib/modules/subsystem-restart.ko /lib/modules/qmi_helpers.ko /lib/modules/smem_state.ko /lib/modules/msm_ipc_logging.ko /lib/modules/subsystem_notif.ko /lib/modules/pmic-voter.ko
+/lib/modules/qcrypto.ko: /lib/modules/qce50.ko /lib/modules/msm_sps.ko /lib/modules/msm_bus.ko /lib/modules/msm_ipc_logging.ko
+/lib/modules/gpucc-lito.ko: /lib/modules/clk-qcom.ko /lib/modules/msm_bus.ko
+/lib/modules/lmh_dbg.ko: /lib/modules/qtee_shm_bridge.ko
+/lib/modules/event_timer.ko:
+/lib/modules/qpnp-revid.ko:
+/lib/modules/google-bms.ko:
+/lib/modules/dwc3-qcom.ko:
+/lib/modules/dwc3.ko: /lib/modules/msm_ipc_logging.ko
+/lib/modules/i2c-qcom-geni.ko: /lib/modules/qcom-geni-se.ko /lib/modules/msm_bus.ko /lib/modules/msm_ipc_logging.ko
+/lib/modules/pmic-voter.ko:
+/lib/modules/of_batterydata.ko:
+/lib/modules/subsystem-restart.ko: /lib/modules/qmi_helpers.ko /lib/modules/smem_state.ko /lib/modules/msm_ipc_logging.ko /lib/modules/subsystem_notif.ko
+/lib/modules/msm_sps.ko: /lib/modules/msm_ipc_logging.ko
+/lib/modules/lmh_cpu_vdd_cdev.ko:
+/lib/modules/usb_f_mtp.ko: /lib/modules/msm_ipc_logging.ko
+/lib/modules/msm-vidc.ko: /lib/modules/fastcvpd.ko /lib/modules/ion-alloc.ko /lib/modules/msm_dma_iommu_mapping.ko /lib/modules/rpmsg_core.ko /lib/modules/smem.ko /lib/modules/msm_bus.ko /lib/modules/secure_buffer.ko /lib/modules/qtee_shm_bridge.ko /lib/modules/llcc-slice.ko /lib/modules/subsystem-restart.ko /lib/modules/qmi_helpers.ko /lib/modules/smem_state.ko /lib/modules/msm_ipc_logging.ko /lib/modules/subsystem_notif.ko
+/lib/modules/rpmh_master_stat.ko: /lib/modules/smem.ko
+/lib/modules/touchscreen_tbn.ko: /lib/modules/qmi_helpers.ko
+/lib/modules/msm_ext_display.ko:
+/lib/modules/cnss_prealloc.ko:
+/lib/modules/fpc1020_platform_tee.ko:
+/lib/modules/msm-poweroff.ko: /lib/modules/watchdog_v2.ko /lib/modules/qpnp-power-on.ko /lib/modules/msm_minidump.ko /lib/modules/smem.ko /lib/modules/qtee_shm_bridge.ko
+/lib/modules/cmd-db.ko:
+/lib/modules/msm_rng.ko: /lib/modules/msm_bus.ko
+/lib/modules/adsprpc.ko: /lib/modules/adsprpc_compat.ko /lib/modules/service-notifier.ko /lib/modules/service-locator.ko /lib/modules/ramdump.ko /lib/modules/rpmsg_core.ko /lib/modules/secure_buffer.ko /lib/modules/qtee_shm_bridge.ko /lib/modules/qmi_helpers.ko /lib/modules/msm_ipc_logging.ko /lib/modules/subsystem_notif.ko
+/lib/modules/microdump_collector.ko: /lib/modules/ramdump.ko /lib/modules/smem.ko /lib/modules/subsystem_notif.ko
+/lib/modules/leds-qpnp-flash-v2.ko: /lib/modules/leds-qpnp-flash-common.ko /lib/modules/qpnp-revid.ko
+/lib/modules/governor_bw_vbif.ko:
+/lib/modules/msm_hdcp.ko:
+/lib/modules/videocc-lito.ko: /lib/modules/clk-qcom.ko /lib/modules/msm_bus.ko
+/lib/modules/service-locator.ko: /lib/modules/qmi_helpers.ko
+/lib/modules/iommu-logger.ko:
+/lib/modules/msm_geni_serial.ko: /lib/modules/qcom-geni-se.ko /lib/modules/msm_bus.ko /lib/modules/msm_ipc_logging.ko
+/lib/modules/phy-msm-ssusb-qmp.ko:
+/lib/modules/hdcp_qseecom.ko: /lib/modules/qseecom.ko /lib/modules/ion-alloc.ko /lib/modules/msm_dma_iommu_mapping.ko /lib/modules/msm_bus.ko /lib/modules/secure_buffer.ko /lib/modules/qtee_shm_bridge.ko
+/lib/modules/msm_scm.ko:
+/lib/modules/qcom-cpufreq-hw.ko:
+/lib/modules/qcom_glink_smem.ko: /lib/modules/qcom_glink_native.ko /lib/modules/rpmsg_core.ko /lib/modules/smem.ko /lib/modules/msm_ipc_logging.ko /lib/modules/subsystem_notif.ko
+/lib/modules/cdsprm.ko: /lib/modules/rpmsg_core.ko
+/lib/modules/rpmh-regulator.ko: /lib/modules/qcom_rpmh.ko /lib/modules/cmd-db.ko /lib/modules/msm_ipc_logging.ko
+/lib/modules/governor_memlat.ko:
+/lib/modules/qmi_helpers.ko:
+/lib/modules/llcc-lito.ko: /lib/modules/llcc-slice.ko
+/lib/modules/msm_dma_iommu_mapping.ko:
+/lib/modules/qcom-geni-se.ko: /lib/modules/msm_bus.ko /lib/modules/msm_ipc_logging.ko
+/lib/modules/service-notifier.ko: /lib/modules/service-locator.ko /lib/modules/qmi_helpers.ko /lib/modules/subsystem_notif.ko
+/lib/modules/arm-smmu-debug.ko: /lib/modules/qtee_shm_bridge.ko
+/lib/modules/mdt_loader.ko: /lib/modules/msm_scm.ko
+/lib/modules/spi-geni-qcom.ko: /lib/modules/qcom-geni-se.ko /lib/modules/msm_bus.ko /lib/modules/msm_ipc_logging.ko
+/lib/modules/subsystem_notif.ko:
+/lib/modules/msm_ipc_logging.ko:
+/lib/modules/clk-spmi-pmic-div.ko:
+/lib/modules/early_random.ko: /lib/modules/qtee_shm_bridge.ko
+/lib/modules/core_hang_detect.ko: /lib/modules/qtee_shm_bridge.ko
+/lib/modules/qpnp_pdphy.ko: /lib/modules/usb-dwc3-msm.ko /lib/modules/dwc3.ko /lib/modules/tcpm.ko /lib/modules/roles.ko /lib/modules/logbuffer.ko /lib/modules/msm_bus.ko /lib/modules/msm_ipc_logging.ko /lib/modules/pmic-voter.ko
+/lib/modules/pac193x.ko:
+/lib/modules/msm_pm.ko: /lib/modules/lpm-stats.ko /lib/modules/event_timer.ko /lib/modules/msm_minidump.ko /lib/modules/smem.ko
+/lib/modules/usb_f_ccid.ko:
+/lib/modules/refgen.ko:
+/lib/modules/usb_f_ptp.ko: /lib/modules/usb_f_mtp.ko /lib/modules/msm_ipc_logging.ko
+/lib/modules/sctp.ko:
+/lib/modules/ebtable_broute.ko: /lib/modules/ebtables.ko
+/lib/modules/governor_gpubw_mon.ko:
+/lib/modules/phy-qcom-ufs-qmp-v3.ko: /lib/modules/phy-qcom-ufs.ko /lib/modules/qcom_rpmh.ko /lib/modules/cmd-db.ko /lib/modules/msm_ipc_logging.ko
+/lib/modules/bcl_pmic5.ko:
+/lib/modules/rdbg.ko: /lib/modules/smem.ko /lib/modules/smem_state.ko
+/lib/modules/governor_msm_adreno_tz.ko: /lib/modules/qtee_shm_bridge.ko
+/lib/modules/heap_mem_ext_v01.ko: /lib/modules/qmi_helpers.ko
+/lib/modules/governor_cdsp_l3.ko: /lib/modules/cdsprm.ko /lib/modules/rpmsg_core.ko
+/lib/modules/bluetooth_power.ko: /lib/modules/slimbus.ko
+/lib/modules/st21nfc.ko:
+/lib/modules/qrtr.ko: /lib/modules/msm_ipc_logging.ko
+/lib/modules/qcom_socinfo.ko: /lib/modules/smem.ko
+/lib/modules/qcom_hwspinlock.ko:
+/lib/modules/slg51000-regulator.ko:
+/lib/modules/sctp_diag.ko: /lib/modules/sctp.ko
+/lib/modules/fsa4480-i2c.ko:
+/lib/modules/rpm_stats.ko:
+/lib/modules/phy-qcom-ufs-qmp-v4-lito.ko: /lib/modules/phy-qcom-ufs.ko /lib/modules/qcom_rpmh.ko /lib/modules/cmd-db.ko /lib/modules/msm_ipc_logging.ko
+/lib/modules/logbuffer.ko:
+/lib/modules/rpmsg_char.ko: /lib/modules/rpmsg_core.ko
+/lib/modules/memory_dump_v2.ko: /lib/modules/msm_minidump.ko /lib/modules/smem.ko /lib/modules/qtee_shm_bridge.ko
+/lib/modules/google_wlan_mac.ko: /lib/modules/cnss_utils.ko
+/lib/modules/thermal-tsens.ko: /lib/modules/qtee_shm_bridge.ko /lib/modules/msm_ipc_logging.ko
+/lib/modules/usb_f_cdev.ko:
+/lib/modules/qseecom.ko: /lib/modules/ion-alloc.ko /lib/modules/msm_dma_iommu_mapping.ko /lib/modules/msm_bus.ko /lib/modules/secure_buffer.ko /lib/modules/qtee_shm_bridge.ko
+/lib/modules/qcom-spmi-temp-alarm.ko:
+/lib/modules/smem.ko:
+/lib/modules/devfreq_devbw.ko: /lib/modules/msm_bus.ko
+/lib/modules/usb_f_diag.ko:
+/lib/modules/vd6281_module.ko:
+/lib/modules/msm_bus_rpmh.ko: /lib/modules/qcom_rpmh.ko /lib/modules/msm_bus.ko /lib/modules/cmd-db.ko /lib/modules/msm_ipc_logging.ko
+/lib/modules/rpmsg_core.ko:
+/lib/modules/qcom_glink_native.ko: /lib/modules/rpmsg_core.ko /lib/modules/msm_ipc_logging.ko /lib/modules/subsystem_notif.ko
+/lib/modules/msm_gsi.ko: /lib/modules/msm_ipc_logging.ko
+/lib/modules/qcom-vadc-common.ko:
+/lib/modules/rmnet.ko: /lib/modules/qmi_helpers.ko
+/lib/modules/qcom_edac.ko:
+/lib/modules/gladiator_hang_detect.ko: /lib/modules/qtee_shm_bridge.ko
+/lib/modules/phy-qcom-ufs-qmp-v4.ko: /lib/modules/phy-qcom-ufs.ko /lib/modules/qcom_rpmh.ko /lib/modules/cmd-db.ko /lib/modules/msm_ipc_logging.ko
+/lib/modules/qti_qmi_sensor.ko: /lib/modules/qmi_helpers.ko
+/lib/modules/smp2p.ko: /lib/modules/smem.ko /lib/modules/smem_state.ko /lib/modules/msm_ipc_logging.ko
+/lib/modules/phy-qcom-ufs.ko: /lib/modules/qcom_rpmh.ko /lib/modules/cmd-db.ko /lib/modules/msm_ipc_logging.ko
+/lib/modules/dwc3-haps.ko:
+/lib/modules/dwc3-of-simple.ko:
+/lib/modules/dcc_v2.ko: /lib/modules/msm_minidump.ko /lib/modules/smem.ko
+/lib/modules/rndis.ko:
+/lib/modules/qmi_cdev.ko: /lib/modules/qmi_helpers.ko
+/lib/modules/at24.ko: /lib/modules/google-bms.ko
+/lib/modules/dm-user.ko:
+/lib/modules/bcl_soc.ko:
+/lib/modules/gpi.ko: /lib/modules/virt-dma.ko /lib/modules/msm_ipc_logging.ko
+/lib/modules/qpnp-qgauge.ko: /lib/modules/qpnp-smb5-charger.ko /lib/modules/qpnp-battery.ko /lib/modules/of_batterydata.ko /lib/modules/logbuffer.ko /lib/modules/pmic-voter.ko /lib/modules/google-bms.ko /lib/modules/qpnp-revid.ko
+/lib/modules/devfreq_qcom_fw.ko:
+/lib/modules/qcedev-module.ko: /lib/modules/qce50.ko /lib/modules/msm_sps.ko /lib/modules/msm_bus.ko /lib/modules/msm_ipc_logging.ko
+/lib/modules/ramdump.ko:
+/lib/modules/pinctrl-spmi-gpio.ko:
+/lib/modules/watchdog_v2.ko: /lib/modules/msm_minidump.ko /lib/modules/smem.ko /lib/modules/qtee_shm_bridge.ko
+/lib/modules/slim_msm_ngd.ko: /lib/modules/of_slimbus.ko /lib/modules/slimbus.ko /lib/modules/service-notifier.ko /lib/modules/service-locator.ko /lib/modules/msm_sps.ko /lib/modules/qmi_helpers.ko /lib/modules/msm_ipc_logging.ko /lib/modules/subsystem_notif.ko
+/lib/modules/rtc-pm8xxx.ko:
+/lib/modules/lpm-stats.ko:
+/lib/modules/peripheral-loader.ko: /lib/modules/ramdump.ko /lib/modules/smem.ko /lib/modules/secure_buffer.ko /lib/modules/qtee_shm_bridge.ko /lib/modules/subsystem-restart.ko /lib/modules/qmi_helpers.ko /lib/modules/smem_state.ko /lib/modules/msm_ipc_logging.ko /lib/modules/subsystem_notif.ko
+/lib/modules/qpnp-amoled-regulator.ko:
+/lib/modules/virt-dma.ko:
+/lib/modules/cdsp-loader.ko: /lib/modules/subsystem-restart.ko /lib/modules/qmi_helpers.ko /lib/modules/smem_state.ko /lib/modules/msm_ipc_logging.ko /lib/modules/subsystem_notif.ko
+/lib/modules/msm_icnss.ko: /lib/modules/adc_tm.ko /lib/modules/service-notifier.ko /lib/modules/service-locator.ko /lib/modules/ramdump.ko /lib/modules/qcom_socinfo.ko /lib/modules/smem.ko /lib/modules/secure_buffer.ko /lib/modules/qtee_shm_bridge.ko /lib/modules/qmi_helpers.ko /lib/modules/msm_ipc_logging.ko /lib/modules/subsystem_notif.ko /lib/modules/qpnp-revid.ko
+/lib/modules/nvmem_qfprom.ko:
+/lib/modules/leds-qpnp-flash-common.ko:
+/lib/modules/pinctrl-msm.ko:
+/lib/modules/llcc-slice.ko:
+/lib/modules/msm_drm.ko: /lib/modules/hdcp_qseecom.ko /lib/modules/qseecom.ko /lib/modules/msm_hdcp.ko /lib/modules/msm_ext_display.ko /lib/modules/fsa4480-i2c.ko /lib/modules/qcom_rpmh.ko /lib/modules/ion-alloc.ko /lib/modules/msm_dma_iommu_mapping.ko /lib/modules/clk-qcom.ko /lib/modules/msm_bus.ko /lib/modules/secure_buffer.ko /lib/modules/qtee_shm_bridge.ko /lib/modules/cmd-db.ko /lib/modules/llcc-slice.ko /lib/modules/msm_ipc_logging.ko
+/lib/modules/slimbus.ko:
+/lib/modules/smcinvoke.ko: /lib/modules/qseecom.ko /lib/modules/ion-alloc.ko /lib/modules/msm_dma_iommu_mapping.ko /lib/modules/msm_bus.ko /lib/modules/secure_buffer.ko /lib/modules/qtee_shm_bridge.ko
+/lib/modules/tps-regulator.ko:
+/lib/modules/regulator_aop_cdev.ko:
+/lib/modules/usb_f_qdss.ko: /lib/modules/usb-dwc3-msm.ko /lib/modules/dwc3.ko /lib/modules/msm_bus.ko /lib/modules/msm_ipc_logging.ko /lib/modules/pmic-voter.ko
+/lib/modules/debugcc-lito.ko:
+/lib/modules/google-battery.ko: /lib/modules/logbuffer.ko /lib/modules/pmic-voter.ko /lib/modules/google-bms.ko
+/lib/modules/qcom_rpmh.ko: /lib/modules/cmd-db.ko /lib/modules/msm_ipc_logging.ko
+/lib/modules/secure_buffer.ko: /lib/modules/qtee_shm_bridge.ko
+/lib/modules/phy-msm-snps-hs.ko:
+/lib/modules/msm_qmp.ko: /lib/modules/msm_ipc_logging.ko
+/lib/modules/glink_probe.ko: /lib/modules/qcom_glink_spss.ko /lib/modules/qcom_glink_smem.ko /lib/modules/qcom_glink_native.ko /lib/modules/rpmsg_core.ko /lib/modules/smem.ko /lib/modules/msm_ipc_logging.ko /lib/modules/subsystem_notif.ko
+/lib/modules/cnss_nl.ko:
+/lib/modules/phy-generic.ko:
+/lib/modules/qrtr-smd.ko: /lib/modules/qrtr.ko /lib/modules/rpmsg_core.ko /lib/modules/msm_ipc_logging.ko
+/lib/modules/system_pm.ko: /lib/modules/rpmh_master_stat.ko /lib/modules/msm_pm.ko /lib/modules/lpm-stats.ko /lib/modules/event_timer.ko /lib/modules/qcom_rpmh.ko /lib/modules/msm_minidump.ko /lib/modules/smem.ko /lib/modules/cmd-db.ko /lib/modules/msm_ipc_logging.ko
+/lib/modules/phy-qcom-ufs-qmp-v3-660.ko: /lib/modules/phy-qcom-ufs.ko /lib/modules/qcom_rpmh.ko /lib/modules/cmd-db.ko /lib/modules/msm_ipc_logging.ko
+/lib/modules/adc_tm.ko: /lib/modules/qpnp-revid.ko
+/lib/modules/regmap-spmi.ko:
+/lib/modules/arm-memlat-mon.ko: /lib/modules/governor_memlat.ko
+/lib/modules/clk-rpmh.ko: /lib/modules/qcom_rpmh.ko /lib/modules/cmd-db.ko /lib/modules/msm_ipc_logging.ko
+/lib/modules/ufs_qcom.ko: /lib/modules/ufshcd-pltfrm.ko /lib/modules/ufshcd-core.ko /lib/modules/phy-qcom-ufs.ko /lib/modules/qcom_rpmh.ko /lib/modules/msm_bus.ko /lib/modules/qtee_shm_bridge.ko /lib/modules/cmd-db.ko /lib/modules/msm_ipc_logging.ko
+/lib/modules/npucc-lito.ko: /lib/modules/clk-qcom.ko /lib/modules/msm_bus.ko
+/lib/modules/st54j_se.ko:
+/lib/modules/qpnp-battery.ko: /lib/modules/pmic-voter.ko
+/lib/modules/ufshcd-core.ko:
+/lib/modules/subsys-pil-tz.ko: /lib/modules/peripheral-loader.ko /lib/modules/ramdump.ko /lib/modules/smem.ko /lib/modules/msm_bus.ko /lib/modules/secure_buffer.ko /lib/modules/qtee_shm_bridge.ko /lib/modules/subsystem-restart.ko /lib/modules/qmi_helpers.ko /lib/modules/smem_state.ko /lib/modules/msm_ipc_logging.ko /lib/modules/subsystem_notif.ko
+/lib/modules/tcpm.ko: /lib/modules/roles.ko /lib/modules/logbuffer.ko
+/lib/modules/msm_memshare.ko: /lib/modules/heap_mem_ext_v01.ko /lib/modules/ramdump.ko /lib/modules/secure_buffer.ko /lib/modules/qtee_shm_bridge.ko /lib/modules/qmi_helpers.ko /lib/modules/subsystem_notif.ko
+/lib/modules/qcom-spmi-adc5.ko: /lib/modules/qcom-vadc-common.ko /lib/modules/msm_ipc_logging.ko /lib/modules/qpnp-revid.ko
+/lib/modules/qcom-spmi-wled.ko: /lib/modules/qpnp-revid.ko
+/lib/modules/clk-aop-qmp.ko:
+/lib/modules/qcom-i2c-pmic.ko:
+/lib/modules/p9221_charger.ko: /lib/modules/logbuffer.ko /lib/modules/pmic-voter.ko
+/lib/modules/phy-qcom-ufs-qrbtc-sdm845.ko: /lib/modules/phy-qcom-ufs.ko /lib/modules/qcom_rpmh.ko /lib/modules/cmd-db.ko /lib/modules/msm_ipc_logging.ko
+/lib/modules/arm-smmu.ko: /lib/modules/iommu-logger.ko /lib/modules/arm-smmu-debug.ko /lib/modules/msm_bus.ko /lib/modules/secure_buffer.ko /lib/modules/qtee_shm_bridge.ko
+/lib/modules/qpnp-smb5-charger.ko: /lib/modules/qpnp-battery.ko /lib/modules/of_batterydata.ko /lib/modules/logbuffer.ko /lib/modules/pmic-voter.ko /lib/modules/qpnp-revid.ko
+/lib/modules/fastcvpd.ko: /lib/modules/rpmsg_core.ko /lib/modules/secure_buffer.ko /lib/modules/qtee_shm_bridge.ko
+/lib/modules/pinctrl-spmi-mpp.ko:
+/lib/modules/bimc-bwmon.ko: /lib/modules/governor_bw_hwmon.ko /lib/modules/msm_bus.ko
+/lib/modules/usb-audio-qmi.ko: /lib/modules/qmi_helpers.ko /lib/modules/msm_ipc_logging.ko
+/lib/modules/msm_minidump.ko: /lib/modules/smem.ko
+/lib/modules/ion-alloc.ko: /lib/modules/msm_dma_iommu_mapping.ko /lib/modules/secure_buffer.ko /lib/modules/qtee_shm_bridge.ko
+/lib/modules/msm_lmh_dcvs.ko: /lib/modules/lmh_dbg.ko /lib/modules/qtee_shm_bridge.ko
+/lib/modules/ddr_stats.ko:
+/lib/modules/glink_pkt.ko: /lib/modules/rpmsg_core.ko /lib/modules/msm_ipc_logging.ko
+/lib/modules/qcom_glink_spss.ko: /lib/modules/qcom_glink_native.ko /lib/modules/rpmsg_core.ko /lib/modules/smem.ko /lib/modules/msm_ipc_logging.ko /lib/modules/subsystem_notif.ko
+/lib/modules/qcom_ipcc.ko:
+/lib/modules/qcom-spmi-sdam.ko:
+/lib/modules/cnss_utils.ko:
+/lib/modules/pwm-qti-lpg.ko:
+/lib/modules/ipa3.ko: /lib/modules/msm_gsi.ko /lib/modules/smem.ko /lib/modules/msm_bus.ko /lib/modules/qtee_shm_bridge.ko /lib/modules/subsystem-restart.ko /lib/modules/qmi_helpers.ko /lib/modules/smem_state.ko /lib/modules/msm_ipc_logging.ko /lib/modules/subsystem_notif.ko
+/lib/modules/modemsmem.ko: /lib/modules/qcom_socinfo.ko /lib/modules/smem.ko
+/lib/modules/msm_sharedmem.ko: /lib/modules/secure_buffer.ko /lib/modules/qtee_shm_bridge.ko
+/lib/modules/qcom_llcc_pmu.ko:
+/lib/modules/qcom-spmi-pmic.ko: /lib/modules/regmap-spmi.ko
+/lib/modules/spmi-pmic-arb.ko:
